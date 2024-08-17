@@ -93,13 +93,13 @@
 
         <button onclick="calcularDose()">Calcular Doses</button>
 
-        <div class="result" id="resultAmoxicilina">Amoxicilina:</div>
-        <div class="result" id="resultAzitromicina">Azitromicina:</div>
-        <div class="result" id="resultDipironaGotas">Dipirona (gotas):</div>
-        <div class="result" id="resultDipironaXarope">Dipirona (xarope):</div>
-        <div class="result" id="resultIbuprofeno">Ibuprofeno:</div>
-        <div class="result" id="resultParacetamol">Paracetamol:</div>
-        <div class="result" id="resultLidocaina">Lidocaína 2% com epinefrina:</div>
+        <div class="result" id="resultAmoxicilina">Amoxicilina 250mg/5ml:</div>
+        <div class="result" id="resultAzitromicina">Azitromicina 200mg/5ml:</div>
+        <div class="result" id="resultDipironaGotas">Dipirona 500mg/1ml (gotas):</div>
+        <div class="result" id="resultDipironaXarope">Dipirona 50mg/1ml (xarope):</div>
+        <div class="result" id="resultIbuprofeno">Ibuprofeno 100mg/1ml:</div>
+        <div class="result" id="resultParacetamol">Paracetamol 200mg/1ml:</div>
+        <div class="result" id="resultLidocaina">Lidocaína 2% com epinefrina 1:100.000:</div>
 
         <div class="credit">
             Desenvolvido por Franklin R - Odontologia
@@ -145,25 +145,25 @@
             const tubetesLidocaina = Math.min(peso / 10, 4);
 
             // Exibe os resultados
-            document.getElementById('resultAmoxicilina').innerText = `Amoxicilina: ${doseAmoxicilina.toFixed(1)} ml`;
-            document.getElementById('resultAzitromicina').innerText = `Azitromicina: ${doseAzitromicina.toFixed(1)} ml`;
-            document.getElementById('resultDipironaGotas').innerText = `Dipirona (gotas): ${Math.round(gotasDipirona)} gotas`;
-            document.getElementById('resultDipironaXarope').innerText = `Dipirona (xarope): ${doseDipironaXarope.toFixed(1)} ml`;
-            document.getElementById('resultIbuprofeno').innerText = `Ibuprofeno: ${Math.round(gotasIbuprofeno)} gotas`;
-            document.getElementById('resultParacetamol').innerText = `Paracetamol: ${Math.round(gotasParacetamol)} gotas`;
-            document.getElementById('resultLidocaina').innerText = `Lidocaína 2% com epinefrina: ${tubetesLidocaina.toFixed(1)} tubete(s)`;
+            document.getElementById('resultAmoxicilina').innerText = `Amoxicilina 250mg/5ml: ${doseAmoxicilina.toFixed(1)} ml`;
+            document.getElementById('resultAzitromicina').innerText = `Azitromicina 200mg/5ml: ${doseAzitromicina.toFixed(1)} ml`;
+            document.getElementById('resultDipironaGotas').innerText = `Dipirona 500mg/1ml (gotas): ${Math.round(gotasDipirona)} gotas`;
+            document.getElementById('resultDipironaXarope').innerText = `Dipirona 50mg/1ml (xarope): ${doseDipironaXarope.toFixed(1)} ml`;
+            document.getElementById('resultIbuprofeno').innerText = `Ibuprofeno 100mg/1ml: ${Math.round(gotasIbuprofeno)} gotas`;
+            document.getElementById('resultParacetamol').innerText = `Paracetamol 200mg/1ml: ${Math.round(gotasParacetamol)} gotas`;
+            document.getElementById('resultLidocaina').innerText = `Lidocaína 2% com epinefrina 1:100.000: ${tubetesLidocaina.toFixed(1)} tubete(s)`;
         }
 
         function resetarCampos() {
             document.getElementById('peso').value = '';
             document.getElementById('error-message').textContent = '';
-            document.getElementById('resultAmoxicilina').innerText = 'Amoxicilina:';
-            document.getElementById('resultAzitromicina').innerText = 'Azitromicina:';
-            document.getElementById('resultDipironaGotas').innerText = 'Dipirona (gotas):';
-            document.getElementById('resultDipironaXarope').innerText = 'Dipirona (xarope):';
-            document.getElementById('resultIbuprofeno').innerText = 'Ibuprofeno:';
-            document.getElementById('resultParacetamol').innerText = 'Paracetamol:';
-            document.getElementById('resultLidocaina').innerText = 'Lidocaína 2% com epinefrina:';
+            document.getElementById('resultAmoxicilina').innerText = 'Amoxicilina 250mg/5ml:';
+            document.getElementById('resultAzitromicina').innerText = 'Azitromicina 200mg/5ml:';
+            document.getElementById('resultDipironaGotas').innerText = 'Dipirona 500mg/1ml (gotas):';
+            document.getElementById('resultDipironaXarope').innerText = 'Dipirona 50mg/1ml (xarope):';
+            document.getElementById('resultIbuprofeno').innerText = 'Ibuprofeno 100mg/1ml:';
+            document.getElementById('resultParacetamol').innerText = 'Paracetamol 200mg/1ml:';
+            document.getElementById('resultLidocaina').innerText = 'Lidocaína 2% com epinefrina 1:100.000:';
         }
     </script>
 </body>
