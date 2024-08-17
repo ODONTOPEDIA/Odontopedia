@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Medicamentos em Odontopediatria</title>
+    <!-- Link para as fontes Merriweather e Raleway -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e0f7fa;
-            color: #0277bd;
+            font-family: 'Raleway', sans-serif; /* Fonte padrão para todo o texto */
+            background-color: #f5f5f5; /* Cinza claro */
+            color: #6a1b9a; /* Roxo pastel */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,7 +31,9 @@
         }
         h1 {
             text-align: center;
-            color: #01579b;
+            color: #000000; /* Preto para o título */
+            font-family: 'Merriweather', serif; /* Fonte para o título */
+            font-weight: 700; /* Peso da fonte para o título */
         }
         label {
             display: block;
@@ -39,7 +44,7 @@
             width: calc(100% - 22px);
             padding: 10px;
             margin-bottom: 20px;
-            border: 1px solid #0277bd;
+            border: 1px solid #dcd9f8; /* Novo roxo */
             border-radius: 4px;
         }
         button {
@@ -47,25 +52,30 @@
             padding: 10px;
             border: none;
             border-radius: 4px;
-            background-color: #01579b;
+            background-color: #482e4d; /* Cor de fundo do botão */
             color: #ffffff;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-family: 'Raleway', sans-serif; /* Fonte para o botão */
         }
         button:hover {
-            background-color: #0288d1;
+            background-color: #6a1b9a; /* Roxo pastel */
         }
         .result {
-            margin-top: 20px;
-            font-size: 18px;
+            background-color: #f3e5f5; /* Roxo pastel claro */
+            border: 1px solid #dcd9f8; /* Novo roxo */
+            border-radius: 8px;
+            padding: 5px; /* Espaçamento interno reduzido */
+            margin-top: 10px; /* Espaçamento externo reduzido */
+            font-size: 16px; /* Tamanho da fonte ajustado para 16px */
             text-align: center;
         }
         .credit {
             margin-top: 30px;
             font-size: 14px;
             text-align: center;
-            color: #01579b;
+            color: #dcd9f8; /* Novo roxo */
         }
         .error-message {
             color: red;
