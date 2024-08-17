@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Medicamentos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            color: #0277bd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #01579b;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #0277bd;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #01579b;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0288d1;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+        .credit {
+            margin-top: 30px;
+            font-size: 14px;
+            text-align: center;
+            color: #01579b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Medicamentos</h1>
+        <label for="peso">Peso da Criança (em kg):</label>
+        <input type="number" id="peso" step="0.1" min="0" placeholder="Digite o peso">
+
+        <button onclick="calcularDose()">Calcular Doses</button>
+
+        <div class="result" id="resultAmoxicilina">Amoxicilina:</div>
+        <div class="result" id="resultAzitromicina">Azitromicina:</div>
+        <div class="result" id="resultDipironaGotas">Dipirona (gotas):</div>
+        <div class="result" id="resultDipironaXarope">Dipirona (xarope):</div>
+        <div class="result" id="resultIbuprofeno">Ibuprofeno:</div>
+        <div class="result" id="resultParacetamol">Paracetamol:</div>
+
+        <div class="credit">
+            Desenvolvido por Franklin R - Odontologia
+        </div>
+    </div>
+
+    <script>
+        function calcularDose() {
+            // Obtém o valor do peso
+            const peso = parseFloat(document.getElementById('peso').value);
+            
+            if (isNaN(peso) || peso <= 0) {
+                alert('Por favor, insira um peso válido.');
+                return;
+            }
+
+            // Cálculo para Amoxicilina
+            const Y = peso * 50;
+            const doseAmoxicilina = (Y * 5) / 250 / 3;
+
+            // Cálculo para Azitromicina
+            const B = peso * 10;
+            const doseAzitromicina = (B * 5) / 200;
+
+            // Cálculo para Dipirona Gotas
+            const gotasDipirona = Math.min(peso * 0.5, 20); // no máximo 20 gotas
+
+            // Cálculo para Dipirona Xarope
+            const Z = peso * 10;
+            const doseDipironaXarope = (Z * 1) / 50;
+
+            // Cálculo para Ibuprofeno
+            const gotasIbuprofeno = Math.min(peso, 30); // no máximo 30 gotas
+
+            // Cálculo para Paracetamol
+            const gotasParacetamol = Math.min(peso, 35); // no máximo 35 gotas
+
+            // Exibe os resultados com uma casa decimal
+            document.getElementById('resultAmoxicilina').innerText = `Amoxicilina: ${doseAmoxicilina.toFixed(1)} ml`;
+            document.getElementById('resultAzitromicina').innerText = `Azitromicina: ${doseAzitromicina.toFixed(1)} ml`;
+            document.getElementById('resultDipironaGotas').innerText = `Dipirona (gotas): ${gotasDipirona.toFixed(1)} gotas`;
+            document.getElementById('resultDipironaXarope').innerText = `Dipirona (xarope): ${doseDipironaXarope.toFixed(1)} ml`;
+            document.getElementById('resultIbuprofeno').innerText = `Ibuprofeno: ${gotasIbuprofeno.toFixed(1)} gotas`;
+            document.getElementById('resultParacetamol').innerText = `Paracetamol: ${gotasParacetamol.toFixed(1)} gotas`;
+        }
+    </script>
+</body>
+</html>
