@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Medicamentos</title>
+    <title>Calculadora de Medicamentos em Odontopediatria</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,6 +14,9 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-image: url('https://images.unsplash.com/photo-1562602745-e077750736b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNzEyOXwwfDF8c2VhcmNofDJ8fGNoaWxkcmVuJTIwYW5kJTIwZGVudGlzdHxlbnwwfHx8fDE2NTYwMzY0&ixlib=rb-1.2.1&q=80&w=1080');
+            background-repeat: no-repeat;
+            background-size: cover;
         }
         .container {
             background-color: #ffffff;
@@ -48,6 +51,7 @@
             color: #ffffff;
             font-size: 16px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #0288d1;
@@ -63,13 +67,19 @@
             text-align: center;
             color: #01579b;
         }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Calculadora de Medicamentos</h1>
+        <h1>Calculadora de Medicamentos em Odontopediatria</h1>
         <label for="peso">Peso da Criança (em kg):</label>
-        <input type="number" id="peso" step="0.1" min="0" placeholder="Digite o peso">
+        <input type="number" id="peso" step="0.1" min="0" placeholder="Digite o peso" aria-label="Peso da Criança">
+        <div class="error-message" id="error-message"></div>
 
         <button onclick="calcularDose()">Calcular Doses</button>
 
@@ -79,6 +89,7 @@
         <div class="result" id="resultDipironaXarope">Dipirona (xarope):</div>
         <div class="result" id="resultIbuprofeno">Ibuprofeno:</div>
         <div class="result" id="resultParacetamol">Paracetamol:</div>
+        <div class="result" id="resultLidocaina">Lidocaína 2% com epinefrina:</div>
 
         <div class="credit">
             Desenvolvido por Franklin R - Odontologia
@@ -87,11 +98,15 @@
 
     <script>
         function calcularDose() {
-            // Obtém o valor do peso
-            const peso = parseFloat(document.getElementById('peso').value);
-            
+            const pesoInput = document.getElementById('peso');
+            const peso = parseFloat(pesoInput.value);
+            const errorMessage = document.getElementById('error-message');
+
+            // Limpar mensagem de erro
+            errorMessage.textContent = '';
+
             if (isNaN(peso) || peso <= 0) {
-                alert('Por favor, insira um peso válido.');
+                errorMessage.textContent = 'Inserir apenas números';
                 return;
             }
 
@@ -104,17 +119,20 @@
             const doseAzitromicina = (B * 5) / 200;
 
             // Cálculo para Dipirona Gotas
-            const gotasDipirona = Math.min(peso * 0.5, 20); // no máximo 20 gotas
+            const gotasDipirona = Math.min(peso * 0.5, 20);
 
             // Cálculo para Dipirona Xarope
             const Z = peso * 10;
             const doseDipironaXarope = (Z * 1) / 50;
 
             // Cálculo para Ibuprofeno
-            const gotasIbuprofeno = Math.min(peso, 30); // no máximo 30 gotas
+            const gotasIbuprofeno = Math.min(peso, 30);
 
             // Cálculo para Paracetamol
-            const gotasParacetamol = Math.min(peso, 35); // no máximo 35 gotas
+            const gotasParacetamol = Math.min(peso, 35);
+
+            // Cálculo para Lidocaína 2% com epinefrina
+            const tubetesLidocaina = Math.min(peso / 10, 4);
 
             // Exibe os resultados com uma casa decimal
             document.getElementById('resultAmoxicilina').innerText = `Amoxicilina: ${doseAmoxicilina.toFixed(1)} ml`;
@@ -123,7 +141,27 @@
             document.getElementById('resultDipironaXarope').innerText = `Dipirona (xarope): ${doseDipironaXarope.toFixed(1)} ml`;
             document.getElementById('resultIbuprofeno').innerText = `Ibuprofeno: ${gotasIbuprofeno.toFixed(1)} gotas`;
             document.getElementById('resultParacetamol').innerText = `Paracetamol: ${gotasParacetamol.toFixed(1)} gotas`;
+            document.getElementById('resultLidocaina').innerText = `Lidocaína 2% com epinefrina: ${tubetesLidocaina.toFixed(1)} tubete(s)`;
         }
+
+        function resetarCampos() {
+            document.getElementById('peso').value = '';
+            document.getElementById('error-message').textContent = '';
+            document.getElementById('resultAmoxicilina').innerText = 'Amoxicilina:';
+            document.getElementById('resultAzitromicina').innerText = 'Azitromicina:';
+            document.getElementById('resultDipironaGotas').innerText = 'Dipirona (gotas):';
+            document.getElementById('resultDipironaXarope').innerText = 'Dipirona (xarope):';
+            document.getElementById('resultIbuprofeno').innerText = 'Ibuprofeno:';
+            document.getElementById('resultParacetamol').innerText = 'Paracetamol:';
+            document.getElementById('resultLidocaina').innerText = 'Lidocaína 2% com epinefrina:';
+        }
+
+        // Executar cálculo ao pressionar Enter
+        document.getElementById('peso').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                calcularDose();
+            }
+        });
     </script>
 </body>
 </html>
