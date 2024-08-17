@@ -144,13 +144,13 @@
             // Cálculo para Lidocaína 2% com epinefrina
             const tubetesLidocaina = Math.min(peso / 10, 4);
 
-            // Exibe os resultados com uma casa decimal
+            // Exibe os resultados
             document.getElementById('resultAmoxicilina').innerText = `Amoxicilina: ${doseAmoxicilina.toFixed(1)} ml`;
             document.getElementById('resultAzitromicina').innerText = `Azitromicina: ${doseAzitromicina.toFixed(1)} ml`;
-            document.getElementById('resultDipironaGotas').innerText = `Dipirona (gotas): ${gotasDipirona.toFixed(1)} gotas`;
+            document.getElementById('resultDipironaGotas').innerText = `Dipirona (gotas): ${Math.round(gotasDipirona)} gotas`;
             document.getElementById('resultDipironaXarope').innerText = `Dipirona (xarope): ${doseDipironaXarope.toFixed(1)} ml`;
-            document.getElementById('resultIbuprofeno').innerText = `Ibuprofeno: ${gotasIbuprofeno.toFixed(1)} gotas`;
-            document.getElementById('resultParacetamol').innerText = `Paracetamol: ${gotasParacetamol.toFixed(1)} gotas`;
+            document.getElementById('resultIbuprofeno').innerText = `Ibuprofeno: ${Math.round(gotasIbuprofeno)} gotas`;
+            document.getElementById('resultParacetamol').innerText = `Paracetamol: ${Math.round(gotasParacetamol)} gotas`;
             document.getElementById('resultLidocaina').innerText = `Lidocaína 2% com epinefrina: ${tubetesLidocaina.toFixed(1)} tubete(s)`;
         }
 
@@ -165,13 +165,6 @@
             document.getElementById('resultParacetamol').innerText = 'Paracetamol:';
             document.getElementById('resultLidocaina').innerText = 'Lidocaína 2% com epinefrina:';
         }
-
-        // Executar cálculo ao pressionar Enter
-        document.getElementById('peso').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                calcularDose();
-            }
-        });
     </script>
 </body>
 </html>
