@@ -209,6 +209,14 @@
 
         // Adiciona um ouvinte de evento ao campo de peso para limpar a mensagem de erro e resetar os resultados quando o valor mudar
         document.getElementById('peso').addEventListener('input', resetarCampos);
+
+        // Adiciona um ouvinte de evento para detectar a tecla Enter
+        document.getElementById('peso').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Impede o comportamento padrão do Enter
+                calcularDose();
+            }
+        });
     </script>
 </body>
 </html>
