@@ -140,7 +140,7 @@
         <div class="result" id="resultDipironaXarope" data-tooltip="10mg/kg">Dipirona 50mg/1ml (xarope):</div>
         <div class="result" id="resultIbuprofeno" data-tooltip="1 gota por kg">Ibuprofeno 100mg/1ml:</div>
         <div class="result" id="resultParacetamol" data-tooltip="1 gota por kg">Paracetamol 200mg/1ml:</div>
-        <div class="result" id="resultLidocaina" data-tooltip="4,4mg/kg">Lidocaína 2% com epinefrina 1:100.000:</div>
+        <div class="result" id="resultLidocaina" data-tooltip="4,4mg/kg">Lidocaína 2% + Epi. 1:100.000:</div>
 
         <div class="credit">
             Desenvolvido por Franklin R - Odontologia
@@ -192,7 +192,7 @@
             document.getElementById('resultDipironaXarope').innerText = `Dipirona 50mg/1ml (xarope): ${doseDipironaXarope.toFixed(1)} ml`;
             document.getElementById('resultIbuprofeno').innerText = `Ibuprofeno 100mg/1ml: ${Math.round(gotasIbuprofeno)} gotas`;
             document.getElementById('resultParacetamol').innerText = `Paracetamol 200mg/1ml: ${Math.round(gotasParacetamol)} gotas`;
-            document.getElementById('resultLidocaina').innerText = `Lidocaína 2% com epinefrina 1:100.000: ${tubetesLidocaina.toFixed(1)} tubete(s)`;
+            document.getElementById('resultLidocaina').innerText = `Lidocaína 2% + Epi. 1:100.000: ${tubetesLidocaina.toFixed(1)} tubete(s)`;
         }
 
         // Função para resetar os resultados
@@ -204,7 +204,7 @@
             document.getElementById('resultDipironaXarope').innerText = 'Dipirona 50mg/1ml (xarope):';
             document.getElementById('resultIbuprofeno').innerText = 'Ibuprofeno 100mg/1ml:';
             document.getElementById('resultParacetamol').innerText = 'Paracetamol 200mg/1ml:';
-            document.getElementById('resultLidocaina').innerText = 'Lidocaína 2% com epinefrina 1:100.000:';
+            document.getElementById('resultLidocaina').innerText = 'Lidocaína 2% + Epi. 1:100.000:';
         }
 
         // Adiciona um ouvinte de evento ao campo de peso para limpar a mensagem de erro e resetar os resultados quando o valor mudar
