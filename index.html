@@ -109,16 +109,11 @@
         }
         .result .titulo-medicamento {
             text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-            color: #6a1b9a;
-            margin-bottom: 10px;
-        }
-        .result .subtitulo-medicamento {
-            text-align: center;
-            font-style: italic;
-            color: #9e9e9e;
-            margin-bottom: 15px;
+            font-style: italic; /* Adiciona itálico */
+            font-size: 14px; /* Tamanho da fonte reduzido */
+            color: #9e9e9e; /* Cor do texto alterada para cinza */
+            margin-bottom: 6px; /* Ajusta o espaçamento abaixo do título para 6px */
+            font-weight: normal; /* Remove o negrito */
         }
         .credit {
             margin-top: 30px;
@@ -197,50 +192,45 @@
 
             let dose = '';
             let titulo = '';
-            let subtitulo = '';
 
             switch (medicamento) {
                 case 'Amoxicilina':
-                    const doseAmoxicilina = (peso * 50) / 250 / 3 * 5;
-                    titulo = 'Amoxicilina';
-                    subtitulo = 'Amoxicilina (50mg/kg)';
-                    dose = `Nome do paciente:\n\nUso interno\n\nAmoxicilina 250mg/5ml ------ 1 frasco\n\nTomar ${doseAmoxicilina.toFixed(1)} ml de 8 em 8 horas durante 7 dias.`;
+                    const Y = peso * 50;
+                    const doseAmoxicilina = (Y * 5) / 250 / 3;
+                    titulo = 'Amoxicilina (50mg/kg)';
+                    dose = `Uso interno\n\nAmoxicilina 250mg/5ml ------ 1 frasco\n\nTomar ${doseAmoxicilina.toFixed(1)} ml de 8 em 8 horas durante 7 dias.`;
                     break;
                 case 'Azitromicina':
-                    const doseAzitromicina = (peso * 10) / 200 / 5 * 5;
-                    titulo = 'Azitromicina';
-                    subtitulo = 'Azitromicina (10mg/kg)';
-                    dose = `Nome do paciente:\n\nUso interno\n\nAzitromicina 200mg/5ml ------ 1 frasco\n\nTomar ${doseAzitromicina.toFixed(1)} ml de 24 em 24 horas durante 3 dias.`;
+                    const B = peso * 10;
+                    const doseAzitromicina = (B * 5) / 200;
+                    titulo = 'Azitromicina (10mg/kg)';
+                    dose = `Uso interno\n\nAzitromicina 200mg/5ml ------ 1 frasco\n\nTomar ${doseAzitromicina.toFixed(1)} ml de 24 em 24 horas durante 3 dias.`;
                     break;
                 case 'DipironaGotas':
                     const gotasDipirona = Math.min(peso * 0.5, 20);
-                    titulo = 'Dipirona (gotas)';
-                    subtitulo = 'Dipirona (gotas) 1/2 gota/kg';
-                    dose = `Nome do paciente:\n\nUso interno\n\nDipirona 500mg/1ml (gotas) ------ 1 frasco\n\nTomar ${gotasDipirona.toFixed(0)} gotas de 6 em 6 horas por 3 dias.`;
+                    titulo = 'Dipirona (gotas) 1/2 gota/kg';
+                    dose = `Uso interno\n\nDipirona 500mg/1ml (gotas) ------ 1 frasco\n\nTomar ${gotasDipirona.toFixed(0)} gotas de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'DipironaXarope':
-                    const doseDipironaXarope = (peso * 10) / 500 * 10;
-                    titulo = 'Dipirona (xarope)';
-                    subtitulo = 'Dipirona (xarope) 10mg/kg';
-                    dose = `Nome do paciente:\n\nUso interno\n\nDipirona 500mg/10ml (xarope) ------ 1 frasco\n\nTomar ${doseDipironaXarope.toFixed(1)} ml de 6 em 6 horas por 3 dias.`;
+                    const Z = peso * 10;
+                    const doseDipironaXarope = (Z * 1) / 50;
+                    titulo = 'Dipirona (xarope) 10mg/kg';
+                    dose = `Uso interno\n\nDipirona 500mg/10ml (xarope) ------ 1 frasco\n\nTomar ${doseDipironaXarope.toFixed(1)} ml de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'Ibuprofeno':
                     const gotasIbuprofeno = Math.min(peso, 30);
-                    titulo = 'Ibuprofeno';
-                    subtitulo = 'Ibuprofeno 1 gota/kg';
-                    dose = `Nome do paciente:\n\nUso interno\n\nIbuprofeno 100mg/5ml ------ 1 frasco\n\nTomar ${gotasIbuprofeno.toFixed(0)} gotas de 8 em 8 horas por 3 dias.`;
+                    titulo = 'Ibuprofeno 1 gota/kg';
+                    dose = `Uso interno\n\nIbuprofeno 100mg/5ml ------ 1 frasco\n\nTomar ${gotasIbuprofeno.toFixed(0)} gotas de 8 em 8 horas por 3 dias.`;
                     break;
                 case 'Paracetamol':
                     const gotasParacetamol = Math.min(peso, 35);
-                    titulo = 'Paracetamol';
-                    subtitulo = 'Paracetamol 1 gota/kg';
-                    dose = `Nome do paciente:\n\nUso interno\n\nParacetamol 200mg/5ml ------ 1 frasco\n\nTomar ${gotasParacetamol.toFixed(0)} gotas de 6 em 6 horas por 3 dias.`;
+                    titulo = 'Paracetamol 1 gota/kg';
+                    dose = `Uso interno\n\nParacetamol 200mg/5ml ------ 1 frasco\n\nTomar ${gotasParacetamol.toFixed(0)} gotas de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'Lidocaina':
-                    const tubetesLidocaina = Math.min(peso * 4.4 / 1000, 4);
-                    titulo = 'Lidocaína';
-                    subtitulo = 'Lidocaína 4.4mg/kg';
-                    dose = `Nome do paciente:\n\nUso interno\n\nLidocaína 2% com epinefrina 1:100.000\n\nUtilizar até ${tubetesLidocaina.toFixed(1)} tubetes.`;
+                    const tubetesLidocaina = Math.min(peso / 10, 4);
+                    titulo = 'Lidocaína 4.4mg/kg';
+                    dose = `Uso interno\n\nLidocaína 2% com epinefrina 1:100.000\n\nUtilizar até ${tubetesLidocaina.toFixed(1)} tubetes.`;
                     break;
                 default:
                     errorMessage.textContent = 'Por favor, selecione um medicamento.';
@@ -248,7 +238,7 @@
                     return;
             }
 
-            resultDiv.innerHTML = `<div class="titulo-medicamento">${titulo}</div>\n<div class="subtitulo-medicamento">${subtitulo}</div>\n${dose}`;
+            resultDiv.innerHTML = `<div class="titulo-medicamento">${titulo}</div>\n${dose}`;
             resultDiv.classList.add('active');
         }
 
