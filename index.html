@@ -11,9 +11,9 @@
         html, body {
             height: 100%;
             margin: 0;
+            font-family: 'Raleway', sans-serif;
         }
         body {
-            font-family: 'Raleway', sans-serif;
             background-color: #f5f5f5;
             color: #6a1b9a;
             display: flex;
@@ -30,7 +30,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             max-width: 500px;
             width: 100%;
-            max-height: 90vh; /* Ajuste conforme necessário */
+            box-sizing: border-box;
             overflow-y: auto;
         }
         h1 {
@@ -38,6 +38,7 @@
             color: #000000;
             font-family: 'Merriweather', serif;
             font-weight: 700;
+            margin: 0 0 20px;
         }
         label {
             display: block;
@@ -53,7 +54,6 @@
             box-sizing: border-box;
             background-color: #f5f5f5;
             color: #6a1b9a;
-            font-family: 'Raleway', sans-serif;
             font-size: 16px;
         }
         select {
@@ -71,10 +71,6 @@
         .select2-container--default .select2-selection--single .select2-selection__arrow b {
             border-color: #6a1b9a transparent transparent transparent;
         }
-        input[type="number"], select {
-            outline: none;
-            border: 1px solid #dcd9f8;
-        }
         .input-focused {
             border-color: #6a1b9a;
             box-shadow: 0 0 0 2px rgba(106, 27, 154, 0.2);
@@ -84,16 +80,25 @@
             padding: 10px;
             border: none;
             border-radius: 4px;
-            background-color: #482e4d;
-            color: #ffffff;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
             font-family: 'Raleway', sans-serif;
             margin-top: 10px;
         }
-        button:hover {
-            background-color: #3e2a4e;
+        .button-prescrever {
+            background-color: #482e4d; /* Cor original do botão Prescrever */
+            color: #ffffff;
+        }
+        .button-prescrever:hover {
+            background-color: #3e2a4e; /* Cor ao passar o mouse */
+        }
+        .button-limpar {
+            background-color: #DC143C; /* Cor do botão Limpar */
+            color: #ffffff;
+        }
+        .button-limpar:hover {
+            background-color: #c8102e; /* Cor ao passar o mouse */
         }
         .result {
             background-color: #f3e5f5;
@@ -105,7 +110,7 @@
             text-align: left;
             white-space: pre-wrap;
             display: none;
-            overflow: auto; /* Adicionado para garantir rolagem se o conteúdo for grande */
+            overflow: auto;
         }
         .result.active {
             display: block;
@@ -114,11 +119,11 @@
         }
         .result .titulo-medicamento {
             text-align: center;
-            font-style: italic; /* Adiciona itálico */
-            font-size: 14px; /* Tamanho da fonte reduzido */
-            color: #9e9e9e; /* Cor do texto alterada para cinza */
-            margin-bottom: 6px; /* Ajusta o espaçamento abaixo do título para 6px */
-            font-weight: normal; /* Remove o negrito */
+            font-style: italic;
+            font-size: 14px;
+            color: #9e9e9e;
+            margin-bottom: 6px;
+            font-weight: normal;
         }
         .credit {
             margin-top: 30px;
@@ -130,6 +135,23 @@
             color: red;
             text-align: center;
             margin-top: 10px;
+        }
+
+        /* Media Queries para telas menores */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            input[type="number"], select {
+                width: calc(100% - 20px);
+            }
+            button {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .result {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -154,8 +176,8 @@
 
         <div class="error-message" id="error-message"></div>
 
-        <button onclick="calcularDose(true)">Prescrever</button>
-        <button onclick="resetarCampos()">Limpar</button>
+        <button class="button-prescrever" onclick="calcularDose(true)">Prescrever</button>
+        <button class="button-limpar" onclick="resetarCampos()">Limpar</button>
 
         <div class="result" id="result"></div>
 
@@ -174,8 +196,6 @@
             });
         });
 
-        let isPrescribed = false;
-
         function calcularDose(cliqueNoBotao) {
             const pesoInput = document.getElementById('peso');
             const peso = parseFloat(pesoInput.value);
@@ -192,7 +212,6 @@
                     resultDiv.classList.remove('active');
                     return;
                 }
-                isPrescribed = true;
             }
 
             let dose = '';
@@ -203,39 +222,39 @@
                     const Y = peso * 50;
                     const doseAmoxicilina = (Y * 5) / 250 / 3;
                     titulo = 'Amoxicilina (50mg/kg)';
-                    dose = `Uso interno\n\nAmoxicilina 250mg/5ml ------ 1 frasco\n\nTomar ${doseAmoxicilina.toFixed(1)} ml de 8 em 8 horas durante 7 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nAmoxicilina 250mg/5ml ------ 1 frasco\n\nTomar ${doseAmoxicilina.toFixed(1)} ml de 8 em 8 horas durante 7 dias.`;
                     break;
                 case 'Azitromicina':
                     const B = peso * 10;
                     const doseAzitromicina = (B * 5) / 200;
                     titulo = 'Azitromicina (10mg/kg)';
-                    dose = `Uso interno\n\nAzitromicina 200mg/5ml ------ 1 frasco\n\nTomar ${doseAzitromicina.toFixed(1)} ml de 24 em 24 horas durante 3 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nAzitromicina 200mg/5ml ------ 1 frasco\n\nTomar ${doseAzitromicina.toFixed(1)} ml de 24 em 24 horas durante 3 dias.`;
                     break;
                 case 'DipironaGotas':
                     const gotasDipirona = Math.min(peso * 0.5, 20);
                     titulo = 'Dipirona (gotas) 1/2 gota/kg';
-                    dose = `Uso interno\n\nDipirona 500mg/1ml (gotas) ------ 1 frasco\n\nTomar ${gotasDipirona.toFixed(0)} gotas de 6 em 6 horas por 3 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nDipirona 500mg/1ml (gotas) ------ 1 frasco\n\nTomar ${gotasDipirona.toFixed(0)} gotas de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'DipironaXarope':
                     const Z = peso * 10;
                     const doseDipironaXarope = (Z * 1) / 50;
                     titulo = 'Dipirona (xarope) 10mg/kg';
-                    dose = `Uso interno\n\nDipirona 500mg/10ml (xarope) ------ 1 frasco\n\nTomar ${doseDipironaXarope.toFixed(1)} ml de 6 em 6 horas por 3 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nDipirona 500mg/10ml (xarope) ------ 1 frasco\n\nTomar ${doseDipironaXarope.toFixed(1)} ml de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'Ibuprofeno':
                     const gotasIbuprofeno = Math.min(peso, 30);
                     titulo = 'Ibuprofeno 1 gota/kg';
-                    dose = `Uso interno\n\nIbuprofeno 100mg/5ml ------ 1 frasco\n\nTomar ${gotasIbuprofeno.toFixed(0)} gotas de 8 em 8 horas por 3 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nIbuprofeno 100mg/5ml ------ 1 frasco\n\nTomar ${gotasIbuprofeno.toFixed(0)} gotas de 8 em 8 horas por 3 dias.`;
                     break;
                 case 'Paracetamol':
                     const gotasParacetamol = Math.min(peso, 35);
                     titulo = 'Paracetamol 1 gota/kg';
-                    dose = `Uso interno\n\nParacetamol 200mg/5ml ------ 1 frasco\n\nTomar ${gotasParacetamol.toFixed(0)} gotas de 6 em 6 horas por 3 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nParacetamol 200mg/5ml ------ 1 frasco\n\nTomar ${gotasParacetamol.toFixed(0)} gotas de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'Lidocaina':
                     const tubetesLidocaina = Math.min(peso / 10, 4);
                     titulo = 'Lidocaína 4.4mg/kg';
-                    dose = `Uso interno\n\nLidocaína 2% com epinefrina 1:100.000\n\nUtilizar até ${tubetesLidocaina.toFixed(1)} tubetes.`;
+                    dose = `<strong>Uso interno</strong>\n\nLidocaína 2% com epinefrina 1:100.000\n\nUtilizar até ${tubetesLidocaina.toFixed(1)} tubetes.`;
                     break;
                 default:
                     errorMessage.textContent = 'Por favor, selecione um medicamento.';
@@ -254,7 +273,6 @@
             document.getElementById('result').textContent = '';
             document.getElementById('result').classList.remove('active');
             $('.select2').val(null).trigger('change');
-            isPrescribed = false; // Resetar o estado da prescrição
         }
     </script>
 </body>
