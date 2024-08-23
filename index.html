@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Medicamentos em Odontopediatria</title>
-    <!-- Link para as fontes Merriweather e Raleway -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.2/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         body {
-            font-family: 'Raleway', sans-serif; /* Fonte padrão para todo o texto */
-            background-color: #f5f5f5; /* Cinza claro */
-            color: #6a1b9a; /* Roxo pastel */
+            font-family: 'Raleway', sans-serif;
+            background-color: #f5f5f5;
+            color: #6a1b9a;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -31,92 +31,91 @@
         }
         h1 {
             text-align: center;
-            color: #000000; /* Preto para o título */
-            font-family: 'Merriweather', serif; /* Fonte para o título */
-            font-weight: 700; /* Peso da fonte para o título */
+            color: #000000;
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
         }
         label {
             display: block;
             margin-bottom: 10px;
             font-weight: bold;
         }
-        input[type="number"] {
+        input[type="number"], select {
             width: calc(100% - 22px);
             padding: 10px;
             margin-bottom: 20px;
-            border: 1px solid #dcd9f8; /* Novo roxo */
+            border: 1px solid #dcd9f8;
             border-radius: 4px;
+            box-sizing: border-box; /* Ajusta o tamanho do campo para incluir o padding e a borda */
+            background-color: #f5f5f5;
+            color: #6a1b9a;
+            font-family: 'Raleway', sans-serif;
+            font-size: 16px;
+        }
+        select {
+            appearance: none; /* Remove o estilo padrão do dropdown */
+            padding-right: 35px; /* Adiciona espaço para o ícone */
+        }
+        .select2-container--default .select2-selection--single {
+            height: 38px; /* Ajusta a altura da caixa select2 */
+            padding: 5px; /* Ajusta o padding */
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 100%; /* Ajusta a altura da seta para se alinhar ao select */
+            right: 10px; /* Ajusta a posição da seta */
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow b {
+            border-color: #6a1b9a transparent transparent transparent; /* Define a cor da seta */
+        }
+        input[type="number"], select {
+            outline: none;
+            border: 1px solid #dcd9f8;
+        }
+        .input-focused {
+            border-color: #6a1b9a;
+            box-shadow: 0 0 0 2px rgba(106, 27, 154, 0.2); /* Borda roxa quando em foco */
         }
         button {
             width: 100%;
             padding: 10px;
             border: none;
             border-radius: 4px;
-            background-color: #482e4d; /* Cor de fundo do botão */
+            background-color: #482e4d;
             color: #ffffff;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            font-family: 'Raleway', sans-serif; /* Fonte para o botão */
+            font-family: 'Raleway', sans-serif;
         }
         button:hover {
-            background-color: #3e2a4e; /* Cor do botão ao passar o mouse */
+            background-color: #3e2a4e;
         }
         .result {
-            background-color: #f3e5f5; /* Roxo pastel claro */
-            border: 1px solid #dcd9f8; /* Novo roxo */
+            background-color: #f3e5f5;
+            border: 1px solid #dcd9f8;
             border-radius: 8px;
-            padding: 5px; /* Espaçamento interno reduzido */
-            margin-top: 10px; /* Espaçamento externo reduzido */
-            font-size: 16px; /* Tamanho da fonte ajustado para 16px */
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 16px;
+            text-align: left;
+            white-space: pre-wrap; /* Mantém a formatação de quebras de linha */
+            /* Inicialmente escondido */
+            display: none;
+        }
+        .result.active {
+            display: block;
+            border-color: #6a1b9a;
+            box-shadow: 0 0 0 2px rgba(106, 27, 154, 0.2); /* Borda roxa quando o resultado é exibido */
+        }
+        .result .centralizado {
             text-align: center;
-            position: relative; /* Necessário para posicionar o tooltip */
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-        .result::before {
-            content: attr(data-tooltip);
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            background-color: #472e4d; /* Cor de fundo do tooltip */
-            color: #ffffff; /* Cor do texto do tooltip */
-            padding: 5px;
-            border-radius: 4px;
-            white-space: nowrap;
-            font-size: 12px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-        .result:hover::before {
-            opacity: 1;
-        }
-        .result:hover {
-            color: transparent;
-        }
-        .result:hover::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            background-color: #472e4d; /* Cor de fundo do tooltip */
-            color: #ffffff; /* Cor do texto do tooltip */
-            padding: 5px;
-            border-radius: 4px;
-            white-space: nowrap;
-            font-size: 12px;
-            opacity: 1;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
+            font-weight: bold;
         }
         .credit {
             margin-top: 30px;
             font-size: 14px;
             text-align: center;
-            color: #9e9e9e; /* Cinza médio para os créditos */
+            color: #9e9e9e;
         }
         .error-message {
             color: red;
@@ -128,87 +127,111 @@
 <body>
     <div class="container">
         <h1>Calculadora de Medicamentos em Odontopediatria</h1>
+
         <label for="peso">Peso da Criança (em kg):</label>
         <input type="number" id="peso" step="0.1" min="0" placeholder="Digite o peso" aria-label="Peso da Criança">
+        
+        <label for="medicamento">Selecione o Medicamento:</label>
+        <select id="medicamento" class="select2">
+            <option value="" disabled selected>Escolha um medicamento</option>
+            <option value="Amoxicilina">Amoxicilina</option>
+            <option value="Azitromicina">Azitromicina</option>
+            <option value="DipironaGotas">Dipirona (gotas)</option>
+            <option value="DipironaXarope">Dipirona (xarope)</option>
+            <option value="Ibuprofeno">Ibuprofeno</option>
+            <option value="Paracetamol">Paracetamol</option>
+            <option value="Lidocaina">Lidocaína</option>
+        </select>
+
         <div class="error-message" id="error-message"></div>
 
-        <button onclick="calcularDose()">Calcular Doses</button>
+        <button onclick="calcularDose()">Calcular Dose</button>
 
-        <div class="result" id="resultAmoxicilina" data-tooltip="50mg/kg/dia">Amoxicilina 250mg/5ml:</div>
-        <div class="result" id="resultAzitromicina" data-tooltip="10mg/kg/dia">Azitromicina 200mg/5ml:</div>
-        <div class="result" id="resultDipironaGotas" data-tooltip="1/2 gota por kg/dose">Dipirona 500mg/1ml (gotas):</div>
-        <div class="result" id="resultDipironaXarope" data-tooltip="10mg/kg/dose">Dipirona 50mg/1ml (xarope):</div>
-        <div class="result" id="resultIbuprofeno" data-tooltip="1 gota por kg/dose">Ibuprofeno 100mg/1ml:</div>
-        <div class="result" id="resultParacetamol" data-tooltip="1 gota por kg/dose">Paracetamol 200mg/1ml:</div>
-        <div class="result" id="resultLidocaina" data-tooltip="4,4mg/kg">Lidocaína 2% + Epi. 1:100.000:</div>
+        <div class="result" id="result"></div>
 
         <div class="credit">
             Desenvolvido por Franklin R - Odontologia
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.2/dist/js/select2.min.js"></script>
     <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                width: 'resolve', // Ajusta a largura do dropdown
+                dropdownAutoWidth: true // Ajusta a largura do dropdown automaticamente
+            });
+        });
+
         function calcularDose() {
             const pesoInput = document.getElementById('peso');
             const peso = parseFloat(pesoInput.value);
+            const medicamento = document.getElementById('medicamento').value;
             const errorMessage = document.getElementById('error-message');
+            const resultDiv = document.getElementById('result');
 
             // Limpar mensagem de erro
             errorMessage.textContent = '';
+            resultDiv.textContent = ''; // Limpa o resultado
 
             if (isNaN(peso) || peso <= 0) {
-                errorMessage.textContent = 'Inserir apenas números válidos';
+                errorMessage.textContent = 'Inserir apenas números válidos para o peso.';
+                resultDiv.classList.remove('active'); // Remove a classe da borda roxa
                 return;
             }
 
-            // Cálculo para Amoxicilina
-            const Y = peso * 50;
-            const doseAmoxicilina = (Y * 5) / 250 / 3;
+            let dose = '';
 
-            // Cálculo para Azitromicina
-            const B = peso * 10;
-            const doseAzitromicina = (B * 5) / 200;
+            switch (medicamento) {
+                case 'Amoxicilina':
+                    const doseAmoxicilina = (peso * 50 * 5) / 250 / 3;
+                    dose = `<strong>Nome do paciente:</strong> \n\n<span class="centralizado">Uso interno</span>\n\nAmoxicilina 250mg/5ml ------ 1 frasco\n\nTomar ${doseAmoxicilina.toFixed(1)} ml de 8 em 8 horas durante 7 dias.`;
+                    break;
+                case 'Azitromicina':
+                    const doseAzitromicina = (peso * 10 * 3) / 200; // Ajustado para 3 dias
+                    dose = `<strong>Nome do paciente:</strong> \n\n<span class="centralizado">Uso interno</span>\n\nAzitromicina 200mg/5ml ------ 1 frasco\n\nTomar ${doseAzitromicina.toFixed(1)} ml de 24 em 24 horas durante 3 dias.`;
+                    break;
+                case 'DipironaGotas':
+                    const gotasDipirona = Math.min(peso * 0.5, 20);
+                    dose = `<strong>Nome do paciente:</strong> \n\n<span class="centralizado">Uso interno</span>\n\nDipirona 500mg/1ml (gotas) ------ 1 frasco\n\nTomar ${Math.round(gotasDipirona)} gotas de 6 em 6 horas durante 3 dias.`;
+                    break;
+                case 'DipironaXarope':
+                    const doseDipironaXarope = (peso * 10) / 50;
+                    dose = `<strong>Nome do paciente:</strong> \n\n<span class="centralizado">Uso interno</span>\n\nDipirona 50mg/1ml (xarope) ------ 1 frasco\n\nTomar ${doseDipironaXarope.toFixed(1)} ml de 6 em 6 horas durante 3 dias.`;
+                    break;
+                case 'Ibuprofeno':
+                    const gotasIbuprofeno = Math.min(peso, 30);
+                    dose = `<strong>Nome do paciente:</strong> \n\n<span class="centralizado">Uso interno</span>\n\nIbuprofeno 100mg/1ml ------ 1 frasco\n\nTomar ${Math.round(gotasIbuprofeno)} gotas de 8 em 8 horas durante 3 dias.`;
+                    break;
+                case 'Paracetamol':
+                    const gotasParacetamol = Math.min(peso, 35);
+                    dose = `<strong>Nome do paciente:</strong> \n\n<span class="centralizado">Uso interno</span>\n\nParacetamol 200mg/1ml ------ 1 frasco\n\nTomar ${Math.round(gotasParacetamol)} gotas de 6 em 6 horas durante 3 dias.`;
+                    break;
+                case 'Lidocaina':
+                    const tubetesLidocaina = Math.min(peso / 10, 4);
+                    dose = `<span class="centralizado">Uso interno</span>\n\nLidocaína 2% + Epi. 1:100.000\n\nAdministrar no máximo ${tubetesLidocaina.toFixed(1)} tubete(s).`;
+                    break;
+                default:
+                    errorMessage.textContent = 'Selecione um medicamento.';
+                    resultDiv.classList.remove('active'); // Remove a classe da borda roxa
+                    return;
+            }
 
-            // Cálculo para Dipirona Gotas
-            const gotasDipirona = Math.min(peso * 0.5, 20);
-
-            // Cálculo para Dipirona Xarope
-            const Z = peso * 10;
-            const doseDipironaXarope = (Z * 1) / 50;
-
-            // Cálculo para Ibuprofeno
-            const gotasIbuprofeno = Math.min(peso, 30);
-
-            // Cálculo para Paracetamol
-            const gotasParacetamol = Math.min(peso, 35);
-
-            // Cálculo para Lidocaína 2% com epinefrina
-            const tubetesLidocaina = Math.min(peso / 10, 4);
-
-            // Exibe os resultados
-            document.getElementById('resultAmoxicilina').innerText = `Amoxicilina 250mg/5ml: ${doseAmoxicilina.toFixed(1)} ml`;
-            document.getElementById('resultAzitromicina').innerText = `Azitromicina 200mg/5ml: ${doseAzitromicina.toFixed(1)} ml`;
-            document.getElementById('resultDipironaGotas').innerText = `Dipirona 500mg/1ml (gotas): ${Math.round(gotasDipirona)} gotas`;
-            document.getElementById('resultDipironaXarope').innerText = `Dipirona 50mg/1ml (xarope): ${doseDipironaXarope.toFixed(1)} ml`;
-            document.getElementById('resultIbuprofeno').innerText = `Ibuprofeno 100mg/1ml: ${Math.round(gotasIbuprofeno)} gotas`;
-            document.getElementById('resultParacetamol').innerText = `Paracetamol 200mg/1ml: ${Math.round(gotasParacetamol)} gotas`;
-            document.getElementById('resultLidocaina').innerText = `Lidocaína 2% + Epi. 1:100.000: ${tubetesLidocaina.toFixed(1)} tubete(s)`;
+            resultDiv.innerHTML = dose;
+            resultDiv.classList.add('active'); // Adiciona a classe para aplicar a borda roxa
         }
 
         // Função para resetar os resultados
         function resetarCampos() {
             document.getElementById('error-message').textContent = '';
-            document.getElementById('resultAmoxicilina').innerText = 'Amoxicilina 250mg/5ml:';
-            document.getElementById('resultAzitromicina').innerText = 'Azitromicina 200mg/5ml:';
-            document.getElementById('resultDipironaGotas').innerText = 'Dipirona 500mg/1ml (gotas):';
-            document.getElementById('resultDipironaXarope').innerText = 'Dipirona 50mg/1ml (xarope):';
-            document.getElementById('resultIbuprofeno').innerText = 'Ibuprofeno 100mg/1ml:';
-            document.getElementById('resultParacetamol').innerText = 'Paracetamol 200mg/1ml:';
-            document.getElementById('resultLidocaina').innerText = 'Lidocaína 2% + Epi. 1:100.000:';
+            document.getElementById('result').textContent = '';
+            document.getElementById('result').classList.remove('active'); // Remove a classe da borda roxa
         }
 
-        // Adiciona um ouvinte de evento ao campo de peso para limpar a mensagem de erro e resetar os resultados quando o valor mudar
+        // Adiciona um ouvinte de evento ao campo de peso e seleção de medicamento para limpar a mensagem de erro e resetar os resultados quando o valor mudar
         document.getElementById('peso').addEventListener('input', resetarCampos);
+        document.getElementById('medicamento').addEventListener('change', resetarCampos);
 
         // Adiciona um ouvinte de evento para detectar a tecla Enter
         document.getElementById('peso').addEventListener('keypress', function(event) {
