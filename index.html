@@ -12,16 +12,12 @@
             height: 100%;
             margin: 0;
             font-family: 'Raleway', sans-serif;
-        }
-        body {
             background-color: #f5f5f5;
             color: #6a1b9a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background-image: url('https://images.unsplash.com/photo-1562602745-e077750736b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNzEyOXwwfDF8c2VhcmNofDJ8fGNoaWxkcmVuJTIwYW5kJTIwZGVudGlzdHxlbnwwfHx8fDE2NTYwMzY0&ixlib=rb-1.2.1&q=80&w=1080');
             background-repeat: no-repeat;
             background-size: cover;
+            overflow: auto; /* Permite rolar se o conteúdo exceder a altura da tela */
         }
         .container {
             background-color: #ffffff;
@@ -31,14 +27,17 @@
             max-width: 500px;
             width: 100%;
             box-sizing: border-box;
-            overflow-y: auto;
+            overflow-y: auto; /* Permite rolar se o conteúdo exceder o container */
+            margin: auto; /* Centraliza horizontalmente */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh; /* Garante que o container ocupe pelo menos a altura da tela */
         }
-        h1 {
-            text-align: center;
-            color: #000000;
-            font-family: 'Merriweather', serif;
-            font-weight: 700;
-            margin: 0 0 20px;
+        .container img {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 100%;
         }
         label {
             display: block;
@@ -77,29 +76,29 @@
         }
         button {
             width: 100%;
-            padding: 15px; /* Aumenta o padding dos botões */
+            padding: 15px;
             border: none;
-            border-radius: 8px; /* Aumenta o border-radius para botões maiores */
-            font-size: 18px; /* Aumenta o tamanho da fonte dos botões */
-            font-weight: normal; /* Remove o negrito dos botões */
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: normal;
             cursor: pointer;
             transition: background-color 0.3s ease;
             font-family: 'Raleway', sans-serif;
             margin-top: 10px;
         }
         .button-prescrever {
-            background-color: #482e4d; /* Cor original do botão Prescrever */
+            background-color: #482e4d;
             color: #ffffff;
         }
         .button-prescrever:hover {
-            background-color: #3e2a4e; /* Cor ao passar o mouse */
+            background-color: #3e2a4e;
         }
         .button-limpar {
-            background-color: #DC143C; /* Cor do botão Limpar */
+            background-color: #DC143C;
             color: #ffffff;
         }
         .button-limpar:hover {
-            background-color: #c8102e; /* Cor ao passar o mouse */
+            background-color: #c8102e;
         }
         .result {
             background-color: #f3e5f5;
@@ -147,8 +146,8 @@
                 width: calc(100% - 20px);
             }
             button {
-                font-size: 16px; /* Ajusta o tamanho da fonte dos botões em telas menores */
-                padding: 12px; /* Ajusta o padding dos botões em telas menores */
+                font-size: 16px;
+                padding: 12px;
             }
             .result {
                 font-size: 14px;
@@ -158,7 +157,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Calculadora de Medicamentos em Odontopediatria</h1>
+        <img src="https://github.com/frankx10/calculadora-de-medicamentos/blob/main/TITULO.png?raw=true" alt="Calculadora de Medicamentos em Odontopediatria">
 
         <label for="peso">Peso da Criança (em kg):</label>
         <input type="number" id="peso" step="0.1" min="0" placeholder="Digite o peso" aria-label="Peso da Criança">
@@ -222,34 +221,34 @@
                 case 'Amoxicilina':
                     const Y = peso * 50;
                     const doseAmoxicilina = (Y * 5) / 250 / 3;
-                    titulo = 'Amoxicilina (50mg/kg)';
+                    titulo = 'Amoxicilina (50mg/kg/dia)';
                     dose = `<strong>Uso interno</strong>\n\nAmoxicilina 250mg/5ml ------ 1 frasco\n\nTomar ${doseAmoxicilina.toFixed(1)} ml de 8 em 8 horas durante 7 dias.`;
                     break;
                 case 'Azitromicina':
                     const B = peso * 10;
                     const doseAzitromicina = (B * 5) / 200;
-                    titulo = 'Azitromicina (10mg/kg)';
+                    titulo = 'Azitromicina (10mg/kg/dia)';
                     dose = `<strong>Uso interno</strong>\n\nAzitromicina 200mg/5ml ------ 1 frasco\n\nTomar ${doseAzitromicina.toFixed(1)} ml de 24 em 24 horas durante 3 dias.`;
                     break;
                 case 'DipironaGotas':
                     const gotasDipirona = Math.min(peso * 0.5, 20);
-                    titulo = 'Dipirona (gotas) 1/2 gota/kg';
+                    titulo = 'Dipirona (gotas) 1/2 gota/kg/dose';
                     dose = `<strong>Uso interno</strong>\n\nDipirona 500mg/1ml (gotas) ------ 1 frasco\n\nTomar ${gotasDipirona.toFixed(0)} gotas de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'DipironaXarope':
                     const Z = peso * 10;
                     const doseDipironaXarope = (Z * 1) / 50;
-                    titulo = 'Dipirona (xarope) 10mg/kg';
+                    titulo = 'Dipirona (xarope) 10mg/kg/dose';
                     dose = `<strong>Uso interno</strong>\n\nDipirona 500mg/10ml (xarope) ------ 1 frasco\n\nTomar ${doseDipironaXarope.toFixed(1)} ml de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'Ibuprofeno':
                     const gotasIbuprofeno = Math.min(peso, 30);
-                    titulo = 'Ibuprofeno 1 gota/kg';
+                    titulo = 'Ibuprofeno 1 gota/kg/dose';
                     dose = `<strong>Uso interno</strong>\n\nIbuprofeno 100mg/5ml ------ 1 frasco\n\nTomar ${gotasIbuprofeno.toFixed(0)} gotas de 8 em 8 horas por 3 dias.`;
                     break;
                 case 'Paracetamol':
                     const gotasParacetamol = Math.min(peso, 35);
-                    titulo = 'Paracetamol 1 gota/kg';
+                    titulo = 'Paracetamol 1 gota/kg/dose';
                     dose = `<strong>Uso interno</strong>\n\nParacetamol 200mg/5ml ------ 1 frasco\n\nTomar ${gotasParacetamol.toFixed(0)} gotas de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'Lidocaina':
