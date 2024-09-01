@@ -172,6 +172,7 @@
             <option value="Ibuprofeno">Ibuprofeno</option>
             <option value="Paracetamol">Paracetamol</option>
             <option value="Lidocaina">Lidocaína</option>
+            <option value="Nistatina">Nistatina</option>
         </select>
 
         <div class="error-message" id="error-message"></div>
@@ -256,6 +257,10 @@
                     titulo = 'Lidocaína 4.4mg/kg';
                     dose = `<strong>Uso interno</strong>\n\nLidocaína 2% com epinefrina 1:100.000\n\nUtilizar até ${tubetesLidocaina.toFixed(1)} tubetes.`;
                     break;
+                case 'Nistatina':
+                    titulo = 'Nistatina 100.000 UI/dose';
+                    dose = `<strong>Uso interno</strong>\n\nNistatina Susp. Oral 100.000 UI/mL ------ 1 frasco\n\nUmedecer gaze na solução e levar as regiões afetadas a cada 6 horas durante 14 dias.`;
+                    break;
                 default:
                     errorMessage.textContent = 'Por favor, selecione um medicamento.';
                     resultDiv.classList.remove('active');
@@ -269,10 +274,8 @@
         function resetarCampos() {
             document.getElementById('peso').value = '';
             document.getElementById('medicamento').value = '';
-            document.getElementById('error-message').textContent = '';
-            document.getElementById('result').textContent = '';
             document.getElementById('result').classList.remove('active');
-            $('.select2').val(null).trigger('change');
+            document.getElementById('error-message').textContent = '';
         }
     </script>
 </body>
