@@ -170,10 +170,10 @@
             <option value="DipironaGotas">Dipirona (gotas)</option>
             <option value="DipironaXarope">Dipirona (xarope)</option>
             <option value="Ibuprofeno">Ibuprofeno</option>
-            <option value="Paracetamol">Paracetamol</option>
             <option value="Lidocaina">Lidocaína</option>
-            <option value="Nistatina">Nistatina</option>
             <option value="Midazolam">Midazolam</option>
+            <option value="Nistatina">Nistatina</option>
+            <option value="Paracetamol">Paracetamol</option>
             <option value="Prilocaina">Prilocaina</option>
         </select>
 
@@ -197,6 +197,18 @@
                 width: 'resolve',
                 dropdownAutoWidth: true
             });
+
+            // Função para ordenar as opções
+            function ordenarOpcoes(selectElement) {
+                const options = Array.from(selectElement.options);
+                options.sort((a, b) => a.text.localeCompare(b.text));
+                selectElement.innerHTML = '';
+                options.forEach(option => selectElement.add(option));
+            }
+
+            // Ordena as opções da caixa de seleção ao carregar a página
+            const selectElement = document.getElementById('medicamento');
+            ordenarOpcoes(selectElement);
         });
 
         function calcularDose(cliqueNoBotao) {
