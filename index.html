@@ -232,14 +232,16 @@
 
             switch (medicamento) {
                 case 'Amoxicilina':
-                    const Y = peso * 50;
-                    const doseAmoxicilina = (Y * 5) / 250 / 3;
+                    let Y = peso * 50;
+                    let doseAmoxicilina = (Y * 5) / 250 / 3;
+                    if (doseAmoxicilina > 30) doseAmoxicilina = 30; // Limite máximo
                     titulo = 'Amoxicilina (50mg/kg/dia)';
                     dose = `<strong>Uso interno</strong>\n\nAmoxicilina 250mg/5ml ------ 1 frasco\n\nTomar ${doseAmoxicilina.toFixed(1)} ml de 8 em 8 horas durante 7 dias.`;
                     break;
                 case 'Azitromicina':
-                    const B = peso * 10;
-                    const doseAzitromicina = (B * 5) / 200;
+                    let B = peso * 10;
+                    let doseAzitromicina = (B * 5) / 200;
+                    if (doseAzitromicina > 12.5) doseAzitromicina = 12.5; // Limite máximo
                     titulo = 'Azitromicina (10mg/kg/dia)';
                     dose = `<strong>Uso interno</strong>\n\nAzitromicina 200mg/5ml ------ 1 frasco\n\nTomar ${doseAzitromicina.toFixed(1)} ml de 24 em 24 horas durante 3 dias.`;
                     break;
@@ -249,8 +251,9 @@
                     dose = `<strong>Uso interno</strong>\n\nDipirona 500mg/1ml (gotas) ------ 1 frasco\n\nTomar ${gotasDipirona.toFixed(0)} gotas de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'DipironaXarope':
-                    const Z = peso * 10;
-                    const doseDipironaXarope = (Z * 1) / 50;
+                    let Z = peso * 10;
+                    let doseDipironaXarope = (Z * 1) / 50;
+                    if (doseDipironaXarope > 10) doseDipironaXarope = 10; // Limite máximo
                     titulo = 'Dipirona (xarope) 10mg/kg/dose';
                     dose = `<strong>Uso interno</strong>\n\nDipirona 500mg/10ml (xarope) ------ 1 frasco\n\nTomar ${doseDipironaXarope.toFixed(1)} ml de 6 em 6 horas por 3 dias.`;
                     break;
@@ -274,8 +277,9 @@
                     dose = `<strong>Uso interno</strong>\n\nNistatina Susp. Oral 100.000 UI/mL ------ 1 frasco\n\nUmedecer gaze na solução e levar as regiões afetadas a cada 6 horas durante 14 dias.`;
                     break;
                 case 'Midazolam':
-                    const D = peso * 0.25; // Dose total necessária em mg
-                    const comprimidos = D / 7.5; // Quantidade de comprimidos necessários
+                    let D = peso * 0.25; // Dose total necessária em mg
+                    let comprimidos = D / 7.5; // Quantidade de comprimidos necessários
+                    if (comprimidos > 2.7) comprimidos = 2.7; // Limite máximo
                     titulo = 'Midazolam (0,25g/kg/dose)';
                     dose = `<strong>Uso interno</strong>\n\nMidazolam 7,5mg ------ 1 comprimido\n\nAdministrar ${comprimidos.toFixed(1)} comprimido(s) 45 minutos antes do procedimento clínico.`;
                     break;
@@ -296,9 +300,8 @@
 
         function resetarCampos() {
             document.getElementById('peso').value = '';
-            document.getElementById('medicamento').selectedIndex = 0;
+            document.getElementById('medicamento').value = '';
             document.getElementById('error-message').textContent = '';
-            document.getElementById('result').textContent = '';
             document.getElementById('result').classList.remove('active');
         }
     </script>
