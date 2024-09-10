@@ -232,10 +232,10 @@
 
             switch (medicamento) {
                 case 'Amoxicilina':
-                    let Y = peso * 50;
+                    let Y = peso * 60;
                     let doseAmoxicilina = (Y * 5) / 250 / 3;
                     if (doseAmoxicilina > 30) doseAmoxicilina = 30; // Limite máximo
-                    titulo = 'Amoxicilina (50mg/kg/dia)';
+                    titulo = 'Amoxicilina (60mg/kg/dia)';
                     dose = `<strong>Uso interno</strong>\n\nAmoxicilina 250mg/5ml ------ 1 frasco\n\nTomar ${doseAmoxicilina.toFixed(1)} ml de 8 em 8 horas durante 7 dias.`;
                     break;
                 case 'Azitromicina':
