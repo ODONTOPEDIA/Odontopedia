@@ -17,7 +17,33 @@
             background-image: url('https://images.unsplash.com/photo-1562602745-e077750736b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNzEyOXwwfDF8c2VhcmNofDJ8fGNoaWxkcmVuJTIwYW5kJTIwZGVudGlzdHxlbnwwfHx8fDE2NTYwMzY0&ixlib=rb-1.2.1&q=80&w=1080');
             background-repeat: no-repeat;
             background-size: cover;
-            overflow: auto; /* Permite rolar se o conteúdo exceder a altura da tela */
+            overflow: auto;
+        }
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            z-index: 1000;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .splash-screen img {
+            max-width: 80%;
+            height: auto;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
         .container {
             background-color: #ffffff;
@@ -27,12 +53,17 @@
             max-width: 500px;
             width: 100%;
             box-sizing: border-box;
-            overflow-y: auto; /* Permite rolar se o conteúdo exceder o container */
-            margin: auto; /* Centraliza horizontalmente */
+            overflow-y: auto;
+            margin: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            min-height: 100vh; /* Garante que o container ocupe pelo menos a altura da tela */
+            min-height: 100vh;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .container.show {
+            opacity: 1;
         }
         .container img {
             display: block;
@@ -156,6 +187,10 @@
     </style>
 </head>
 <body>
+    <div class="splash-screen">
+        <img src="https://raw.githubusercontent.com/frankx10/calculadora-de-medicamentos/main/t%C3%ADtulo.png" alt="Calculadora de Medicamentos em Odontopediatria">
+    </div>
+
     <div class="container">
         <img src="https://github.com/frankx10/calculadora-de-medicamentos/blob/main/t%C3%ADtulo.png?raw=true" alt="Calculadora de Medicamentos em Odontopediatria">
 
@@ -198,7 +233,6 @@
                 dropdownAutoWidth: true
             });
 
-            // Função para ordenar as opções
             function ordenarOpcoes(selectElement) {
                 const options = Array.from(selectElement.options);
                 options.sort((a, b) => a.text.localeCompare(b.text));
@@ -206,24 +240,26 @@
                 options.forEach(option => selectElement.add(option));
             }
 
-            // Ordena as opções da caixa de seleção ao carregar a página
             const selectElement = document.getElementById('medicamento');
             ordenarOpcoes(selectElement);
+
+            $('#peso').on('focus', function() {
+                $(this).addClass('input-focused');
+            }).on('blur', function() {
+                $(this).removeClass('input-focused');
+            });
         });
 
         function calcularDose(cliqueNoBotao) {
-            const pesoInput = document.getElementById('peso');
-            const peso = parseFloat(pesoInput.value);
+            const peso = parseFloat(document.getElementById('peso').value);
             const medicamento = document.getElementById('medicamento').value;
-            const errorMessage = document.getElementById('error-message');
             const resultDiv = document.getElementById('result');
+            const errorDiv = document.getElementById('error-message');
+            resultDiv.classList.remove('active');
+            errorDiv.textContent = '';
 
-            errorMessage.textContent = '';
-            resultDiv.textContent = '';
-
-            if (isNaN(peso) || peso <= 0) {
-                errorMessage.textContent = 'Por favor, insira um peso válido.';
-                resultDiv.classList.remove('active');
+            if (!peso || !medicamento) {
+                errorDiv.textContent = 'Por favor, preencha todos os campos.';
                 return;
             }
 
@@ -301,9 +337,19 @@
         function resetarCampos() {
             document.getElementById('peso').value = '';
             document.getElementById('medicamento').value = '';
-            document.getElementById('error-message').textContent = '';
             document.getElementById('result').classList.remove('active');
+            document.getElementById('result').textContent = '';
+            document.getElementById('error-message').textContent = '';
         }
+
+        // Inicializa a animação de fade out
+        $(window).on('load', function() {
+            setTimeout(() => {
+                $('.splash-screen').fadeOut(1500, () => {
+                    $('.container').addClass('show');
+                });
+            }, 3000); // Tempo de exibição da imagem antes de iniciar o fade out
+        });
     </script>
 </body>
 </html>
