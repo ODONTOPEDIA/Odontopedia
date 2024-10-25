@@ -320,7 +320,7 @@
                     dose = `<strong>Uso interno</strong>\n\nMidazolam 7,5mg ------ 1 comprimido\n\nAdministrar <strong>${comprimidos.toFixed(1)} comprimido(s)</strong> 45 minutos antes do procedimento clínico.`;
                     break;
                 case 'Prilocaina':
-                    const dosePrilocaina = Math.min(peso / 10, 4);
+                    const dosePrilocaina = peso * 0.1;
                     titulo = 'Prilocaina (0,1 ml/kg/dose)';
                     dose = `<strong>Uso interno</strong>\n\nPrilocaina 3% com Felipressina 0,03UI/ml\n\nUtilizar <strong>${dosePrilocaina.toFixed(1)} tubete(s)</strong>.`;
                     break;
