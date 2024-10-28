@@ -272,36 +272,36 @@
                     let doseAmoxicilina = (Y * 5) / 250 / 3;
                     if (doseAmoxicilina > 30) doseAmoxicilina = 30; // Limite máximo
                     titulo = 'Amoxicilina (60mg/kg/dia)';
-                    dose = `<strong>Uso interno</strong>\n\nAmoxicilina 250mg/5ml ------ 1 frasco\n\nTomar <strong>${doseAmoxicilina.toFixed(1)} ml</strong> de 8 em 8 horas durante 7 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nAmoxicilina 250mg/5ml ⎯⎯⎯⎯⎯⎯ 1 frasco\n\nTomar <strong>${doseAmoxicilina.toFixed(1)} ml</strong> de 8 em 8 horas durante 7 dias.`;
                     break;
                 case 'Azitromicina':
                     let B = peso * 10;
                     let doseAzitromicina = (B * 5) / 200;
                     if (doseAzitromicina > 12.5) doseAzitromicina = 12.5; // Limite máximo
                     titulo = 'Azitromicina (10mg/kg/dia)';
-                    dose = `<strong>Uso interno</strong>\n\nAzitromicina 200mg/5ml ------ 1 frasco\n\nTomar <strong>${doseAzitromicina.toFixed(1)} ml</strong> de 24 em 24 horas durante 3 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nAzitromicina 200mg/5ml ⎯⎯⎯⎯⎯⎯ 1 frasco\n\nTomar <strong>${doseAzitromicina.toFixed(1)} ml</strong> de 24 em 24 horas durante 3 dias.`;
                     break;
                 case 'DipironaGotas':
                     const gotasDipirona = Math.min(peso * 0.5, 20);
                     titulo = 'Dipirona (gotas) 1/2 gota/kg/dose';
-                    dose = `<strong>Uso interno</strong>\n\nDipirona 500mg/1ml (gotas) ------ 1 frasco\n\nTomar <strong>${gotasDipirona.toFixed(0)} gotas</strong> de 6 em 6 horas por 3 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nDipirona 500mg/1ml (gotas) ⎯⎯⎯⎯⎯⎯ 1 frasco\n\nTomar <strong>${gotasDipirona.toFixed(0)} gotas</strong> de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'DipironaXarope':
                     let Z = peso * 10;
                     let doseDipironaXarope = (Z * 1) / 50;
                     if (doseDipironaXarope > 10) doseDipironaXarope = 10; // Limite máximo
                     titulo = 'Dipirona (xarope) 10mg/kg/dose';
-                    dose = `<strong>Uso interno</strong>\n\nDipirona 500mg/10ml (xarope) ------ 1 frasco\n\nTomar <strong>${doseDipironaXarope.toFixed(1)} ml</strong> de 6 em 6 horas por 3 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nDipirona 500mg/10ml (xarope) ⎯⎯⎯⎯⎯⎯ 1 frasco\n\nTomar <strong>${doseDipironaXarope.toFixed(1)} ml</strong> de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'Ibuprofeno':
                     const gotasIbuprofeno = Math.min(peso, 30);
                     titulo = 'Ibuprofeno 1 gota/kg/dose';
-                    dose = `<strong>Uso interno</strong>\n\nIbuprofeno 100mg/5ml ------ 1 frasco\n\nTomar <strong>${gotasIbuprofeno.toFixed(0)} gotas</strong> de 8 em 8 horas por 3 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nIbuprofeno 100mg/5ml ⎯⎯⎯⎯⎯⎯ 1 frasco\n\nTomar <strong>${gotasIbuprofeno.toFixed(0)} gotas</strong> de 8 em 8 horas por 3 dias.`;
                     break;
                 case 'Paracetamol':
                     const gotasParacetamol = Math.min(peso, 35);
                     titulo = 'Paracetamol 1 gota/kg/dose';
-                    dose = `<strong>Uso interno</strong>\n\nParacetamol 200mg/5ml ------ 1 frasco\n\nTomar <strong>${gotasParacetamol.toFixed(0)} gotas</strong> de 6 em 6 horas por 3 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nParacetamol 200mg/5ml ⎯⎯⎯⎯⎯⎯ 1 frasco\n\nTomar <strong>${gotasParacetamol.toFixed(0)} gotas</strong> de 6 em 6 horas por 3 dias.`;
                     break;
                 case 'Lidocaina':
                     const tubetesLidocaina = Math.min(peso / 10, 4);
@@ -310,14 +310,14 @@
                     break;
                 case 'Nistatina':
                     titulo = 'Nistatina 100.000 UI/dose';
-                    dose = `<strong>Uso externo</strong>\n\nNistatina Susp. Oral 100.000 UI/mL ------ 1 frasco\n\nUmedecer gaze na solução e levar as regiões afetadas a cada 6 horas durante 14 dias.`;
+                    dose = `<strong>Uso externo</strong>\n\nNistatina Susp. Oral 100.000 UI/mL ⎯⎯⎯⎯⎯⎯ 1 frasco\n\nUmedecer gaze na solução e levar as regiões afetadas a cada 6 horas durante 14 dias.`;
                     break;
                 case 'Midazolam':
                     let D = peso * 0.5; // Dose total necessária em mg
                     let comprimidos = D / 7.5; // Quantidade de comprimidos necessários
                     if (comprimidos > 2.7) comprimidos = 2.7; // Limite máximo
                     titulo = 'Midazolam (0,5g/kg/dose)';
-                    dose = `<strong>Uso interno</strong>\n\nMidazolam 7,5mg ------ 1 comprimido\n\nAdministrar <strong>${comprimidos.toFixed(1)} comprimido(s)</strong> 45 minutos antes do procedimento clínico.`;
+                    dose = `<strong>Uso interno</strong>\n\nMidazolam 7,5mg ⎯⎯⎯⎯⎯⎯ 1 comprimido\n\nAdministrar <strong>${comprimidos.toFixed(1)} comprimido(s)</strong> 45 minutos antes do procedimento clínico.`;
                     break;
                 case 'Prilocaina':
                     const dosePrilocaina = peso * 0.1;
