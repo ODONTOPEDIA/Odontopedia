@@ -279,7 +279,7 @@
                     let doseAzitromicina = (B * 5) / 200;
                     if (doseAzitromicina > 12.5) doseAzitromicina = 12.5; // Limite máximo
                     titulo = 'Azitromicina (10mg/kg/dia)';
-                    dose = `<strong>Uso interno</strong>\n\nAzitromicina 200mg/5ml ⎯⎯⎯⎯ 1 frasco\n\nTomar <strong>${doseAzitromicina.toFixed(1)} ml</strong> de 24 em 24 horas durante 3 dias.`;
+                    dose = `<strong>Uso interno</strong>\n\nAzitromicina 200mg/5ml ⎯⎯⎯⎯ 1 frasco\n\nTomar <strong>${doseAzitromicina.toFixed(1)} ml</strong> uma vez ao dia durante 3 dias.`;
                     break;
                 case 'DipironaGotas':
                     const gotasDipirona = Math.min(peso * 0.5, 20);
