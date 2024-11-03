@@ -306,7 +306,7 @@
                 case 'Lidocaina':
                     const tubetesLidocaina = Math.min(peso / 10, 4);
                     titulo = 'Lidocaína 4.4mg/kg';
-                    dose = `<strong>Uso interno</strong>\n\nLidocaína 2% com epinefrina 1:100.000\n\nUtilizar até <strong>${tubetesLidocaina.toFixed(1)} tubetes</strong>.`;
+                    dose = `<strong>Uso profissional</strong>\n\nLidocaína 2% com epinefrina 1:100.000\n\nUtilizar até <strong>${tubetesLidocaina.toFixed(1)} tubete(s) durante atendimento clínico</strong>.`;
                     break;
                 case 'Nistatina':
                     titulo = 'Nistatina 100.000 UI/dose';
@@ -322,7 +322,7 @@
                 case 'Prilocaina':
                     const dosePrilocaina = peso * 0.1;
                     titulo = 'Prilocaina (0,1 ml/kg/dose)';
-                    dose = `<strong>Uso interno</strong>\n\nPrilocaina 3% com Felipressina 0,03UI/ml\n\nUtilizar <strong>${dosePrilocaina.toFixed(1)} tubete(s)</strong>.`;
+                    dose = `<strong>Uso profissional</strong>\n\nPrilocaina 3% com Felipressina 0,03UI/ml\n\nUtilizar <strong>${dosePrilocaina.toFixed(1)} tubete(s) durante atendimento clínico</strong>.`;
                     break;
                 default:
                     errorMessage.textContent = 'Por favor, selecione um medicamento.';
